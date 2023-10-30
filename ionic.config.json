@@ -1,0 +1,7 @@
+{
+  "name": "soilless-farm-iot",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
