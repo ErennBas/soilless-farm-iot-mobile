@@ -1,20 +1,26 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
-    <ion-title>
-      Blank
-    </ion-title>
+    <ion-title size="small">Topraksız Tarım Otomasyonu</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Blank</ion-title>
-    </ion-toolbar>
-  </ion-header>
-
-  <div id="container">
-    <strong>Ready to create an app?</strong>
-    <p>Start with Ionic <a target="_blank" rel="noopener noreferrer" href="https://ionicframework.com/docs/components">UI Components</a></p>
-  </div>
+  <ion-refresher (ionRefresh)="handleRefresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+  <ion-row>
+    <ion-col>
+      <ngx-gauge type="arch" [size]="120" [duration]="500" [min]="0" [max]="40" [value]="lastData.waterTemperature"
+        label="Su Sıcaklığı" append="°C" foregroundColor="#2ee7ff"></ngx-gauge>
+    </ion-col>
+    <ion-col>
+      <ngx-gauge type="arch" [size]="120" [duration]="500" [min]="0" [max]="100" [value]="lastData.moisture" label="Nem"
+        append="%" foregroundColor="#220bff"></ngx-gauge>
+    </ion-col>
+    <ion-col>
+      <ngx-gauge type="arch" [size]="120" [duration]="500" [min]="0" [max]="40" [value]="lastData.weatherTemperature"
+        label="Ortam Sıcaklığı" append="°C" foregroundColor="#ff6b6b"></ngx-gauge>
+    </ion-col>
+  </ion-row>
+  <div echarts [options]="chartOption" class="demo-chart"></div>
 </ion-content>

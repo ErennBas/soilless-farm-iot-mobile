@@ -25,3 +25,18 @@
 #container a {
   text-decoration: none;
 }
+
+ion-row {
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+#MyChart {
+  width: 1000px;
+  overflow-x: scroll;
+}
+
+ion-col {
+  display: flex;
+  justify-content: center;
+}
