@@ -4,7 +4,8 @@
 
 export const environment = {
   production: false,
-  apiUrl: 'http://localhost:3000'
+  // apiUrl: 'http://localhost:3000'
+  apiUrl: 'https://api.soilless-farming.erenbas.com'
 };
 
 /*
@@ -15,3 +16,8 @@ export const environment = {
  * on performance if an error is thrown.
  */
 // import 'zone.js/plugins/zone-error';  // Included with Angular CLI.
+
+// TODO tema hep siyah olmalı
+// TODO status bar siyah olmalı
+// TODO logolar olamış
+// TODO header sabit duruyor. Ekranı kısıyor. Sabitlenmesini iptal et

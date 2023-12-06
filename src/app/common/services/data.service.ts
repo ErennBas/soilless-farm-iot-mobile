@@ -11,12 +11,12 @@ import { environment } from '../../../environments/environment';
 export class DataService {
   loading = this.loadingCtrl.create({ animated: true, message: 'Lütfen bekleyin...' });
 
-  public datas: BehaviorSubject<IData[]> = new BehaviorSubject<IData[]>([]);
-  public data: BehaviorSubject<IData> = new BehaviorSubject<IData>({ id: 0, createdDate: new Date, moisture: 0, waterTemperature: 0, weatherTemperature: 0 });
+  public temperatures: BehaviorSubject<IData[]> = new BehaviorSubject<IData[]>([]);
+  public temperature: BehaviorSubject<IData> = new BehaviorSubject<IData>({ id: 0, createdDate: new Date, moisture: 0, waterTemperature: 0, weatherTemperature: 0 });
 
   constructor(private loadingCtrl: LoadingController, private http: HttpClient) {
-    // this.getToday();
-    this.getAll(new Date("01.08.2023"), new Date());
+    this.getNow();
+    this.getToday();
   }
 
   async getToday(event: any = null) {
@@ -24,7 +24,15 @@ export class DataService {
     this.http.get<IData[]>(`${environment.apiUrl}/v1/data/today`).pipe(catchError(async e => {
       (await this.loading).dismiss();
       throw new Error(e);
-    })).subscribe(async (res: IData[]) => { this.datas.next(res); (await this.loading).dismiss(); });
+    })).subscribe(async (res: IData[]) => { this.temperatures.next(res); (await this.loading).dismiss(); });
+  }
+
+  async getNow(event: any = null) {
+    if (!event) { (await this.loading).present(); }
+    this.http.get<IData>(`${environment.apiUrl}/v1/data`).pipe(catchError(async e => {
+      (await this.loading).dismiss();
+      throw new Error(e);
+    })).subscribe(async (res: IData) => { this.temperature.next(res); (await this.loading).dismiss(); });
   }
 
   async getAll(start: Date, end: Date) {
@@ -32,7 +40,7 @@ export class DataService {
     this.http.get<IData[]>(`${environment.apiUrl}/v1/data/${start.toISOString()}/${end.toISOString()}`).pipe(catchError(async e => {
       (await this.loading).dismiss();
       throw new Error(e);
-    })).subscribe(async (res: IData[]) => { this.datas.next(res); (await this.loading).dismiss(); });
+    })).subscribe(async (res: IData[]) => { this.temperatures.next(res); (await this.loading).dismiss(); });
   }
 
 }

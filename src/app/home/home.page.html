@@ -10,17 +10,23 @@
   </ion-refresher>
   <ion-row>
     <ion-col>
-      <ngx-gauge type="arch" [size]="120" [duration]="500" [min]="0" [max]="40" [value]="lastData.waterTemperature"
+      <ngx-gauge type="arch" [size]="120" [duration]="500" [min]="0" [max]="100" [value]="temperature.waterTemperature"
         label="Su Sıcaklığı" append="°C" foregroundColor="#2ee7ff"></ngx-gauge>
     </ion-col>
     <ion-col>
-      <ngx-gauge type="arch" [size]="120" [duration]="500" [min]="0" [max]="100" [value]="lastData.moisture" label="Nem"
+      <ngx-gauge type="arch" [size]="120" [duration]="500" [min]="0" [max]="100" [value]="temperature.moisture" label="Nem"
         append="%" foregroundColor="#220bff"></ngx-gauge>
     </ion-col>
     <ion-col>
-      <ngx-gauge type="arch" [size]="120" [duration]="500" [min]="0" [max]="40" [value]="lastData.weatherTemperature"
+      <ngx-gauge type="arch" [size]="120" [duration]="500" [min]="0" [max]="40" [value]="temperature.weatherTemperature"
         label="Ortam Sıcaklığı" append="°C" foregroundColor="#ff6b6b"></ngx-gauge>
     </ion-col>
   </ion-row>
-  <div echarts [options]="chartOption" class="demo-chart"></div>
+  <ion-row>
+    <ion-col>
+      <input class="nbin" nbInput placeholder="Tarih Aralığı Seçin" [nbDatepicker]="formpicker">
+      <nb-rangepicker #formpicker lang="tr-TR" (rangeChange)="rangeChange($event)" [max]="today"></nb-rangepicker>
+    </ion-col>
+  </ion-row>
+  <div echarts [options]="chartOption" class="demo-chart" (chartInit)="onChartInit($event)"></div>
 </ion-content>

@@ -9,6 +9,7 @@ import { SocketIoConfig, SocketIoModule } from 'ngx-socket-io';
 import { environment } from '../../environments/environment';
 import { NgxGaugeModule } from 'ngx-gauge';
 import { NgxEchartsModule } from 'ngx-echarts';
+import { NbButtonModule, NbCardModule, NbDatepickerModule, NbInputModule } from '@nebular/theme';
 
 
 const config: SocketIoConfig = { url: environment.apiUrl, options: { transports: ['websocket'] } };
@@ -19,6 +20,10 @@ const config: SocketIoConfig = { url: environment.apiUrl, options: { transports:
     FormsModule,
     IonicModule,
     HomePageRoutingModule,
+    NbDatepickerModule,
+    NbButtonModule,
+    NbCardModule,
+    NbInputModule,
     NgxEchartsModule.forRoot({
       echarts: () => import('echarts')
     }),
